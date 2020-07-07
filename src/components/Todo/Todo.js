@@ -5,6 +5,7 @@ const Todo = (props) => {
 
     let classNames = [];
 
+    // Édition des tâches
     if(props.Todos.done !== false) {
         if(props.Editing.Edited && props.Todos.id === props.Editing.id) {
             classNames.push('editing');

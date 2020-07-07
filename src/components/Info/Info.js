@@ -3,6 +3,7 @@ import './Info.css'
 
 const Info = (props) => {
 
+    // Compteur de tâche actives
     let count = props.Todos.reduce(function(accumulator, currentValue) {
         if(currentValue.done === false) {
             return (accumulator + 1)

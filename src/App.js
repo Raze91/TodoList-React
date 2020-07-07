@@ -7,16 +7,20 @@ const uniqid = require('uniqid');
 
 function App() {
 
+  // Tableau des tâches 
   const [Todos, setTodos] = useState([
     { title: "todo 1", done: false, id: uniqid() },
     { title: "todo 2", done: true, id: uniqid() },
     { title: "todo 3", done: false, id: uniqid() }
   ]);
 
+  // Booléan pour gérer l'édition
   const [Editing, setEditing] = useState({ Edited: false, id: '' });
 
+  // State por gérer le filtrage des tâches
   const [Filter, setFilter] = useState('All');
 
+  // Création de tâche
   const onKey = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       setTodos([{ title: event.target.value, done: false, id: uniqid() }, ...Todos]);
@@ -24,6 +28,7 @@ function App() {
     }
   }
 
+  // Cocher les tâches
   const onCheck = (e, todoId) => {
     setTodos(
       Todos.map((todo) => {
@@ -35,6 +40,7 @@ function App() {
     );
   };
 
+  // Suppresion de tâche
   const onDelete = (e, todoId) => {
     Todos.map((todo) => {
       if (todo.id === todoId) {
@@ -44,6 +50,7 @@ function App() {
     })
   }
 
+  // Cocher / Décocher toute les tâches
   const onToggle = (e) => {
     setTodos(
       Todos.map((todo) => {
@@ -54,6 +61,7 @@ function App() {
     )
   }
 
+  // Supprimer les tâches terminées
   const onClearCompleted = (_done) => {
     Todos.map((todo) => {
       setTodos(Todos.filter(todo => todo.done === false))
@@ -62,6 +70,7 @@ function App() {
     })
   }
 
+  // Éditer une tâche
   const onDoubleClick = (e, todoId) => {
     Todos.map((todo) => {
       if (todo.id === todoId) {
@@ -72,6 +81,7 @@ function App() {
     })
   }
 
+  // Valider l'édtion de la tâche
   const onEditing = (e, todoId) => {
     if (e.key === 'Enter' && e.target.value.trim() !== '') {
       setEditing({ Edited: false, id: todoId })
@@ -84,14 +94,17 @@ function App() {
     }
   }
 
+  // Change le state filtrage pour 'Tout'
   const onAll = (e) => {
     setFilter('All');
   }
 
+  // Change le state filtrage pour 'Active'
   const onActive = (e) => {
     setFilter('Active');
   }
 
+  // Change le state de filtrage pour 'Complétées'
   const onCompleted = (e) => {
     setFilter('Completed');
   }
